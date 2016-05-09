@@ -10,18 +10,23 @@ Hoje o post será algo bem simples, extremamente rápido, porém algo que as pes
 
 
 <h3> 
-  <i>Why!?</i>
+  <i>What!? Why!?</i>
 </h3>
 
+Caso não tenha passado por tal necessidade, o motivo desta ação pode ficar meio obscuro. Então pense nas seguintes situações: 
+1 - Mantemos os dados do usuário em uma factory, pois como as mesmas são singleton, sempre iremos acessar o mesmos dados na aplicação inteira. Com isso, gostariamos de verificar o estado destes dados em um ponto específico da aplicação, mas apenas para uma consulta rápida.
+
+2 - Temos uma factory qual serve como interação para um loader, possuí métodos para iniciar e parar o mesmo. Gostaríamos de iniciar tal interação em um momen
+
 <h3> 
-  <i>Contexto</i>
+  <i>Abordagem por escopo</i>
 </h3>
 
 Ter uma ferramente para tal fim quando se trata de diretivas e/ou providers detentores de escopos ($scope) é algo bem comum, pois assim temos acesso ao estado do escope. 
 Ferramentas como o <a href="https://chrome.google.com/webstore/detail/angularjs-batarang/ighdmehidhipcmcojjgiloacoafjmpfk">Batarang</a> fazem isto perfeitamente. 
 
 O porém é que estas ferramentas se baseiam no DOM para construir a árvore de scopes. 
-O AngularJS provê as classes `ng-scope` e `ng-isolate-scope` para que as ferramentas identifiquem os elementos detentores de escopo e com uma instrução simples podemos ter o estado dos mesmos:
+O AngularJS provê as classes <strong>ng-scope</strong> e <strong>ng-isolate-scope</strong> para que as ferramentas identifiquem os elementos detentores de escopo e com uma instrução simples podemos ter o estado dos mesmos:
 
 [markdown]
 ```
@@ -32,7 +37,10 @@ O AngularJS provê as classes `ng-scope` e `ng-isolate-scope` para que as ferram
 
 Como nosso foco é acessar recurso que não se encontra no DOM, precisamos ter outra abordagem, precisamos acessar 
 
-Alías, é sobre apenas uma linha:
+
+<h3> 
+  <i>Injector</i>
+</h3>
 
 [markdown]
 ```
