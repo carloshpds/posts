@@ -8,6 +8,7 @@ Olá, meu nome é <a href="https://github.com/carloshpds">Carlos Henrique</a>, t
 Hoje o post será algo bem simples, extremamente rápido, porém algo que as pessoas me perguntam com muita frequência no mundo do AngularJS: 
 "Como acessar a instância de uma factory ou service diretamente do console?".
 
+PS: Os exemplos estarão em ES2015, então talvez seja necessário verificar a compatibilidade do browser. Apenas troque <i>let</i> por <i>var</i> e <i>=></i> por <i>function</i> que terá a compatibilidade para todos os browsers. :)
 
 <h3> 
   <i>What!? Why!?</i>
@@ -31,7 +32,7 @@ O AngularJS provê as classes <strong>ng-scope</strong> e <strong>ng-isolate-sco
 
 [markdown]
 ```javascript
-  var elements = angular.element('.ng-scope').toArray();
+  let elements = angular.element('.ng-scope').toArray();
   elements.forEach((el) => { console.log( angular.element(el).scope() ) });
 ```
 [/markdown]
@@ -47,10 +48,22 @@ Aos que conhecem o AngularJS um pouco melhor, sabem que o responsável pela inje
 
 Como sabemos que a instância de factories e/ou services são únicas, só precisamos acessa-las via injector. O que muitos não sabem é que há uma maneira bem simples de acessa-lo a partir do console.
 
+Primeiramente devemos conhecer o elemento raiz da aplicação, aquele qual vai o <i>ng-app</i> ou recebe o <i>bootstrap</i> do AngularJs. Sabendo isto, podemos considerar este e todos os elementos filhos possuem acesso ao injector:  
 
 [markdown]
-```
-  angular.element('body').injector()
+```javascript
+  let injector = angular.element(document).injector();
 ```
 [/markdown]
+
+Executando a linha acima temos acesso a todas as funcionalidades do injector. Utilizaremos o método <i>get</i> para acessar nosso loader que chamaremos de <strong>redLoader</strong>.
+
+[markdown]
+```javascript
+  let injector = angular.element(document).injector();
+  let loader   = injector.get('redLoader');
+  loader.start();
+```
+[/markdown]
+
 
